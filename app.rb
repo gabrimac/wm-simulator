@@ -1,35 +1,29 @@
 require 'sinatra'
 require 'sinatra/base'
-require 'data_mapper'
 require 'savon'
 require 'pry-byebug'
+require 'sinatra/soap'
+require 'sinatra/content_for'
+require "sinatra/reloader" if development?
 
-class App < Sinatra::Base
+class App < Sinatra::Application
+
   before do
     headers "Content-Type" => "text/html; charset=utf-8"
   end
 
   get '/' do
+
     @title = 'WebMethods Simulator'
-    @files = Dir.entries("./public/xml")
     haml :index
   end
 
-  get '/pex' do
-    client = Savon.client(wsdl: 'http://localhost:3000/api/bods/action')
+  get '/files' do
+    @files = Store.all
 
-    @response = client.call(:create_bod_meta, message: {
-      bod_id: '01234',
-      gcc: 'ZZA',
-      lcc: 'US001',
-      payroll_exchange_id: '199511190',
-      parent_bod_id: '43210',
-      event: 'hiring',
-      source_bod_id: '4230',
-      system: '1001',
-      batch_position: '/'
-      })
-
-    haml :show
+    haml :'files/index'
   end
 end
+
+require_relative 'models/init'
+require_relative 'routes/init'

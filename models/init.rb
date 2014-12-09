@@ -1,0 +1,5 @@
+require_relative 'store.rb'
+require_relative 'atlas_connector.rb'
+require_relative 'operation.rb'
+require_relative 'log.rb'
+require_relative 'response.rb'

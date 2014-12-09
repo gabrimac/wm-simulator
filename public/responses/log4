@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="nga:pe">
+  <soap:Body>
+    <tns:CreateBodMeta_response>
+      <error_number xsi:type="xsd:int">12</error_number>
+      <error_description xsi:type="xsd:string">API error 12 (bod_not_overridable).
+Original message: BodNotOverridable.</error_description>
+      <log_uuid xsi:type="xsd:string">b355190d-447b-4ce2-adeb-9ff9bb99d4b6</log_uuid>
+    </tns:CreateBodMeta_response>
+  </soap:Body>
+</soap:Envelope>
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="nga:pe">
+  <soap:Body>
+    <tns:CreateBodMeta_response>
+      <error_number xsi:type="xsd:int">12</error_number>
+      <error_description xsi:type="xsd:string">API error 12 (bod_not_overridable).
+Original message: BodNotOverridable.</error_description>
+      <log_uuid xsi:type="xsd:string">0dd2f184-7959-474a-9822-591af923db3e</log_uuid>
+    </tns:CreateBodMeta_response>
+  </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,13 @@
+- if @logs.any?
+  - @logs.each do |log|
+    .row
+      .col-md-8.boxblue
+        %h3
+          = log.filename
+        %code{ :class => "language-html", "data-lang" => "html" }
+          = log.content
+      .col-md-4
+        %a.btn.btn-default{ :href => "/logs/operations/#{log.filename}" } Process
+
+- content_for :footer_buttons do
+  %a.btn.btn-default{ :href => "/logs/new" } New

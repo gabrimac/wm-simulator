@@ -1,0 +1,34 @@
+.row
+  .col-md-12
+    .form-group
+      %input.form-control{ :type => "text", :placeholder => "Insert url" }
+
+- if @operations.any?
+  - @operations.each_with_index do |operation, index|
+    .row
+      .col-md-8
+        .panel-group{ :role => "tablist", "aria-multiselectable" => "true" }
+          .panel.panel-default
+            .panel-heading{ :role => "tab", :id => "heading#{index}" }
+              %h4.panel-title
+                %a{ "data-toggle" => "collapse", "data-parent" => "#accordion", :href => "#collapse#{index}", "aria-expanded" => "true", "aria-controls" => "collapse#{index}"}
+                  = operation.name if operation.name
+            .panel-collapse.collapse{ :id => "collapse#{index}", :role => "tabpanel", "aria-labelledby" => "headingOne"}
+              %code{ :class => "language-html", "data-lang" => "html" }
+              - if operation.attributes
+                - operation.attributes.each_with_index do |attribute, index|
+                  - if index != 0
+                    %div
+                      = "#{attribute}: #{operation.send(attribute)}"
+
+      .col-md-4
+        %a.btn.btn-default{ :href => "/logs/operations/#{@filename}/send/#{index}" } Send
+
+- if @responses
+  .row
+    .col-md-12
+      .box-blue
+        = @responses.content
+
+- content_for :footer_buttons do
+  %a.btn.btn-default{ :href => "/logs/new" } New

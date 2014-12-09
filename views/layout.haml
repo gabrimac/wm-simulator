@@ -5,17 +5,40 @@
     %meta{ :charset => "utf-8" }
     %title= @title || 'WebMethods Simulator'
     %link{ :rel => "stylesheet", :href => "http://yui.yahooapis.com/combo?pure/0.2.0/base-min.css&pure/0.2.0/grids-min.css&pure/0.2.0/forms-min.css&pure/0.2.0/buttons-min.css&pure/0.2.0/menus-min.css&pure/0.2.0/tables-min.css" }
-    %link{ :rel => "stylesheet", :href => "/stylesheets/application.css.scss" }
+    %link{ :rel => "stylesheet", :href => "/stylesheets/application.css" }
+    %link{ :rel => "stylesheet", :href => "/stylesheets/bootstrap.min.css" }
+    %link{ :rel => "stylesheet", :href => "/stylesheets/bootstrap-theme.min.js" }
   %body
-    .container
-      .nav
-        .pure-menu.pure-menu-open.pure-menu-horizontal
-          %ul
+    .navbar.navbar-default{ :role => "navigation" }
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle.collapsed{ "data-toggle" => "collapse", "data-target" => "#bs-example-navbar-collapse-1" }
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{ href: "#" } WebMethods Simulator
+        .collapse.navbar-collapse#bs-example-navbar-collapse-1
+          %ul.nav.navbar-nav
+            %li.active
+              %a{ :href => "/" }
+                Welcome
+                %span.sr-only
             %li
-              %a{ :href => "/" } Home
-            %li.pure-menu-selected
-              %a{ :href => "/pex" } Send Bod Meta Data
-            %li.pure-menu-selected
-              %a{ :href => "/video/list" } Available Videos
-      .main
-        = yield
+              %a{ :href => "/logs/index" }
+                Logs
+            %li
+              %a{ :href => "/bods/index" }
+                Bods
+
+    .container
+      = yield
+
+    - if content_for? :footer_buttons
+      %nav.navbar.navbar-default.navbar-fixed-bottom{role: 'navigation'}
+        .navbar-right.navbar-collapse
+          = yield_content :footer_buttons
+
+    %script{ :src => "/js/jquery-2.1.1.min.js" }
+    %script{ :src => "/js/bootstrap.min.js" }
+

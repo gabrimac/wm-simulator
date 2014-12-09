@@ -1,0 +1,13 @@
+- if @bods.any?
+  - @bods.each do |bod|
+    .row
+      .col-md-8.boxblue
+        %h3
+          = bod.filename
+        %code{ :class => "language-html", "data-lang" => "html" }
+          = bod.content
+      .col-md-4
+        %button.btn.btn-default Process
+
+- content_for :footer_buttons do
+  %a{ :href => "/bods/new" } New
