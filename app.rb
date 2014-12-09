@@ -2,7 +2,6 @@ require 'sinatra'
 require 'sinatra/base'
 require 'savon'
 require 'pry-byebug'
-require 'sinatra/soap'
 require 'sinatra/content_for'
 require "sinatra/reloader" if development?
 
@@ -13,15 +12,15 @@ class App < Sinatra::Application
   end
 
   get '/' do
-
+    welcome_active
     @title = 'WebMethods Simulator'
     haml :index
   end
 
-  get '/files' do
-    @files = Store.all
-
-    haml :'files/index'
+  def welcome_active
+    @welcome_active = "active"
+    @logs_active = ""
+    @bods_active = ""
   end
 end
 

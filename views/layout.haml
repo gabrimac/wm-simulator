@@ -20,14 +20,14 @@
           %a.navbar-brand{ href: "#" } WebMethods Simulator
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
           %ul.nav.navbar-nav
-            %li.active
+            %li{ :class => "#{@welcome_active}" }
               %a{ :href => "/" }
                 Welcome
                 %span.sr-only
-            %li
+            %li{ :class => "#{@logs_active}" }
               %a{ :href => "/logs/index" }
                 Logs
-            %li
+            %li{ :class => "#{@bods_active}" }
               %a{ :href => "/bods/index" }
                 Bods
 
