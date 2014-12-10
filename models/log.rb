@@ -17,7 +17,7 @@ class Log
       end
       operation = @operations.last if operation.nil?
       next unless line.include? "raw"
-      line = line.split(/\"raw\"=>/).at(1)
+      line = line.split(/\"raw\"[=>|:]/).at(1)
       line.split(/,/).each do |param|
         attribute = nil
         value = nil
