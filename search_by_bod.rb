@@ -17,17 +17,20 @@ count = 0
 
 
 def search_confirm bod_id, file, log_bod
-  open(file).grep(/#{bod_id}/).each do |confirm_line|
+  count = 100
+  log_bod = open(file).grep(/#{bod_id}/).inject(log_bod) do |log_bod, confirm_line|
+    count += 1
     operation = confirm_line.scan(/\[([^*]*?)\]/)[3].first
     #if operation == 'create_bod_msg'
       confirm_string = "{"+confirm_line.scan( /\{([^>]*)\}/).last.first+"}"
       confirm_json = JSON.parse(confirm_string)
-      key_hash = confirm_line.scan(/\[([^*]*?)\]/).first.first
+      key_hash = confirm_line.scan(/\[([^*]*?)\]/).first.first + count.to_s
       log_bod[key_hash] = {operation: confirm_line.scan(/\[([^*]*?)\]/)[3].first,
                   text: confirm_line,
                   params_object: confirm_json
                   }
     #end
+      log_bod
   end
   log_bod
 end
@@ -122,17 +125,19 @@ open(file).grep(/#{attached_files_hour}/).each do |file_line|
     file_string = "{"+file_line.scan( /\{([^>]*)\}/).last.first+"}"
     file_json = JSON.parse(file_string)
     raw_attachment = file_json["parameters"]["raw"]["bod_file"]
-    decoded_attachment = Base64.decode64(raw_attachment)
-    bod_id_msg = file_json["parameters"]["raw"]["bod_id"]
-    if decoded_attachment[/#{value}/] && bod_id_msg != value
-      puts "buscar bod: " + bod_id_msg
-      log_bod = search_confirm bod_id_msg, file, log_bod
+    unless raw_attachment.nil?
+      decoded_attachment = Base64.decode64(raw_attachment)
+      bod_id_msg = file_json["parameters"]["raw"]["bod_id"]
+      if decoded_attachment[/#{value}/] && bod_id_msg != value
+        log_bod = search_confirm bod_id_msg, file, log_bod
+      end
     end
   end
 end
 
 
-file_uniq = "file_uniq.log"
+file_uniq = "#{file_to_print}_uniq.log"
+
 
 if print_to_file == 'true'
   file = File.open(file_to_print, 'w')
