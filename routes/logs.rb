@@ -11,10 +11,14 @@ class App < Sinatra::Application
     haml :'logs/index'
   end
 
-
   get "/logs/new" do
     active_log
     haml :'logs/new'
+  end
+
+  get "/logs/load" do
+    active_log
+    haml :'logs/load'
   end
 
   get "/logs/index" do

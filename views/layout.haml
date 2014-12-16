@@ -36,7 +36,7 @@
 
     - if content_for? :footer_buttons
       %nav.navbar.navbar-default.navbar-fixed-bottom{role: 'navigation'}
-        .navbar-right.navbar-collapse
+        .navbar-collapse
           = yield_content :footer_buttons
 
     %script{ :src => "/js/jquery-2.1.1.min.js" }

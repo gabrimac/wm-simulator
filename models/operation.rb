@@ -21,6 +21,7 @@ class Operation
 
   def add_attribute(attribute, value)
     unless @attributes.include? attribute
+      value = Time.now if attribute == "event_time_stamp"
       instance_variable_set("@#{attribute}", value)
       self.class.send(:attr_accessor, attribute)
       @attributes << attribute
