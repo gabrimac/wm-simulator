@@ -17,6 +17,11 @@ class App < Sinatra::Application
     haml :'logs/new'
   end
 
+  get "/logs/load" do
+    active_log
+    haml :'logs/load'
+  end
+
   get "/logs/index" do
     active_log
     @logs = Store.all("logs")

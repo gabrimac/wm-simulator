@@ -1,0 +1,7 @@
+%form.form-horizontal{ :role => "form", :action => "/logs/create", :method => "post" }
+  .form-group
+    %input.form-control{ :type => "text", :name => "log[name]" }
+  .form-group
+    %textarea.form-control{ :rows => "5", :name => "log[body]" }
+  .form-group
+    %button.btn.btn-default{ :type => "submit" } Save
