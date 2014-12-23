@@ -9,17 +9,16 @@
       .col-md-8
         .panel-group{ :role => "tablist", "aria-multiselectable" => "true" }
           .panel.panel-default
-            .panel-heading{ :role => "tab", :id => "heading#{index}" }
+            .panel-heading{ :role => "tab", :id => "heading#{index}", :class => ("active" if session['responses'].include?(index)) }
               %h4.panel-title
                 %a{ "data-toggle" => "collapse", "data-parent" => "#accordion", :href => "#collapse#{index}", "aria-expanded" => "true", "aria-controls" => "collapse#{index}"}
                   = operation.name if operation.name
             .panel-collapse.collapse{ :id => "collapse#{index}", :role => "tabpanel", "aria-labelledby" => "headingOne"}
               %code{ :class => "language-html", "data-lang" => "html" }
               - if operation.attributes
-                - operation.attributes.each_with_index do |attribute, index|
-                  - if index != 0
-                    %div
-                      = "#{attribute}: #{operation.send(attribute)}"
+                - operation.attributes.each do |attribute|
+                  %div
+                    = "#{attribute}: #{operation.send(attribute)}"
 
       .col-md-4
         %a.btn.btn-default{ :href => "/logs/operations/#{@filename}/send/#{index}" } Send

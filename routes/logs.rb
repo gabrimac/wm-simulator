@@ -23,6 +23,7 @@ class App < Sinatra::Application
 
   get "/logs/index" do
     active_log
+    session['responses'] = []
     @logs = Store.all("logs")
 
     haml :'logs/index'
@@ -38,8 +39,32 @@ class App < Sinatra::Application
     haml :'logs/operations'
   end
 
+  post "/logs/download" do
+    active_log
+    name = params[:log][:name] if params[:log][:name]
+    content = params[:log][:body] if params[:log][:body]
+
+    store = Store.new(name, content, "logs")
+
+    redirect "/logs/index" if store.save
+    haml :'logs/index_parser'
+  end
+
+  post "/logs/operations_parser/" do
+    active_log
+    @filename = params[:log][:filename]
+    @bod = params[:log][:bod_id]
+    log = Store.find(@filename, "logs")
+    @responses = Response.find(@filename)
+    parser_log = ParserLog.new(log, @bod).convert_to_operations
+    @operations = parser_log.log_bod
+
+    haml :'logs/operations_parser'
+  end
+
   get "/logs/operations/:filename/send/:index" do
     active_log
+    session['responses'] << params[:index].to_i
     filename = params[:filename]
     log = Store.find(filename, "logs")
     @operations = Log.new(log).convert_to_operations
@@ -47,6 +72,10 @@ class App < Sinatra::Application
 
     operation.execute(filename)
     redirect :"logs/operations/#{filename}"
+  end
+
+  def session_responses
+
   end
 
   def active_log

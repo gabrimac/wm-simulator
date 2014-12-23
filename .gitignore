@@ -2,3 +2,4 @@
 .public/bods
 .public/logs
 .DS_Store
+.public/responses

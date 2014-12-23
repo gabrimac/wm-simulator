@@ -6,3 +6,6 @@ body { width: 100%; }
   border: 1px solid #e1e1e8;
   border-radius: 4px;
 }
+.panel-heading.active {
+  background-color: #BEADAD !important;
+}

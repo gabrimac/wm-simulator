@@ -117,7 +117,6 @@ else
 
 end
 
-
 attached_files_hour = log_bod.keys.sort.first[0, 15]
 open(file).grep(/#{attached_files_hour}/).each do |file_line|
   operation = file_line.scan(/\[([^*]*?)\]/)[3].first
@@ -133,6 +132,10 @@ open(file).grep(/#{attached_files_hour}/).each do |file_line|
       end
     end
   end
+end
+log_bod.keys.each do |key|
+  puts log_bod[key]
+  puts "*" * 100
 end
 
 

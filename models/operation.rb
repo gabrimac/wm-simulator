@@ -9,8 +9,19 @@ class Operation
   WEBMETHODS_OPERATIONS = BOD_OPERATIONS | PEOPLE_OPERATIONS |
   EMPLOYMENT_OPERATIONS | PAYPERIOD_OPERATIONS | %i( read_retro_date )
 
-  def initialize(name, attributes={})
+  PARAMS_CREATE_BOD_META = %i(bod_id gcc lcc payroll_exchange_id parent_bod_id
+    event acknowledge_date_time source_bod_id event_time_stamp system batch_position
+    valid_from payserv_id original_file_name)
+
+  PARAMS_UPDATE_BOD_META = %i(bod_id gcc state payroll_exchange_id payserv_id confirm_bod_id
+    acknowledge_bod_id parent_bod_id long_orchestration_id event_time_stamp system
+    sequence_number ticket_id pay_group_id)
+
+  PARAMS_CREATE_BOD_MSG = %i(bod_id gcc lcc bod_file event_time_stamp source_file_name)
+
+  def initialize(name, date, attributes={})
     @name = name
+    @date = date
     @attributes = []
     attributes.each do |attribute, value|
       instance_variable_set("@#{attribute}", value)
