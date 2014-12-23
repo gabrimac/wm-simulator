@@ -9,3 +9,8 @@ body { width: 100%; }
 .panel-heading.active {
   background-color: #BEADAD !important;
 }
+
+.navbar-fixed-bottom .navbar-collapse{
+    padding-right: 50px !important;
+    padding-left: 0px;
+}
