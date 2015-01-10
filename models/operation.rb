@@ -19,6 +19,17 @@ class Operation
 
   PARAMS_CREATE_BOD_MSG = %i(bod_id gcc lcc bod_file event_time_stamp source_file_name)
 
+  PARAMS_UPDATE_EMPLOYMENT = %i(payroll_exchange_id lcc payserv_id pay_group_id start_date end_date state
+    alternative_ids)
+
+  PARAMS_CREATE_EMPLOYMENT = %i(payroll_exchange_id payserv_id employee_id pay_group_id start_date)
+
+  PARAMS_CREATE_PERSON = %i(gcc payroll_exchange_id person_id family_name given_name mobile_phone land_phone
+    preferred_name email language status forgerock_id database_authenticatable role_list lcc_list password)
+
+  PARAMS_UPDATE_PERSON = %i(payroll_exchange_id family_name given_name mobile_phone land_phone preferred_name
+    email language status forgerock_id database_authenticatable role_list role_list lcc_list password)
+
   def initialize(name, date, attributes={})
     @name = name
     @date = date

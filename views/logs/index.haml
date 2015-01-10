@@ -1,11 +1,18 @@
 - if @logs.any?
-  - @logs.each do |log|
+  - @logs.each_with_index do |log, index|
     .row
       .col-md-8.boxblue
-        %h3
-          = log.filename
-        %code{ :class => "language-html", "data-lang" => "html" }
-          = log.content
+        .panel-group{ :role => "tablist", "aria-multiselectable" => "true" }
+          .panel.panel-default
+            .panel-heading{ :role => "tab", :id => "heading#{index}" }
+              %h4.panel-title
+                %a{ "data-toggle" => "collapse", "data-parent" => "#accordion", :href => "#collapse#{index}", "aria-expanded" => "true", "aria-controls" => "collapse#{index}"}
+                  = log.filename
+            .panel-collapse.collapse{ :id => "collapse#{index}", :role => "tabpanel", "aria-labelledby" => "headingOne"}
+              %code{ :class => "language-html", "data-lang" => "html" }
+                %div
+                  = log.content
+
       .col-md-4
         %a.btn.btn-default{ :href => "/logs/operations/#{log.filename}" } Process
 
